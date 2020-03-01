@@ -1,5 +1,7 @@
 ;;; powershell.el --- run powershell as an inferior shell in emacs
 ;;
+;; -*- coding: utf-8 -*-
+;;
 ;; Author     : Dino Chiesa <dpchiesa@hotmail.com>
 ;; Created    : 10 Apr 2008
 ;; Modified   : May 2010
@@ -556,7 +558,11 @@ Example:
     ;; will know the command is finished when it sees the command
     ;; prompt.
     ;;
-    (process-send-string proc (concat command "\nprompt\n"))
+    ;; (process-send-string proc (concat command "\nprompt\n"))
+    ;;
+    ;; 20200302 - aokit.aecl@gmail.com
+    ;; remove an extra "prompt" brought in case "python -i"
+    (process-send-string proc command)
 
     (accept-process-output proc powershell-command-timeout-seconds)
 
